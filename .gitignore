@@ -1,0 +1,53 @@
+# Laravel
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+.env
+.env.*
+*.env
+Homestead.yaml
+Homestead.json
+npm-debug.log
+yarn-error.log
+package-lock.json
+pnpm-lock.yaml
+
+# Laravel Storage
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+
+# Laravel Mix / Vite Build Files
+/public/mix-manifest.json
+/public/hot
+/public/build
+/public/css
+/public/js
+/public/assets
+/public/fonts
+/public/images
+
+# PHPUnit
+.phpunit.result.cache
+/.phpunit.cache
+
+# IDE / Editor Config
+/.idea
+/.vscode
+/.fleet
+/.zed
+/.nova
+/auth.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Cache files
+*.log
+*.sqlite
+
+# Misc
+.phpactor.json

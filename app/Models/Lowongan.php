@@ -20,6 +20,6 @@ class Lowongan extends Model
 
     public function lamarans()
     {
-        return $this->hasMany(\App\Models\Lamaran::class);
+        return $this->hasMany(Lamaran::class);
     }
 }

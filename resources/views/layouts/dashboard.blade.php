@@ -1,36 +1,31 @@
+{{-- resources/views/layouts/dashboard.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ $title ?? 'Dashboard Kandidat' }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Kandidat - Sistem Rekrutmen</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-50 font-[Poppins] text-gray-800">
+<body class="bg-gray-100 font-sans antialiased flex">
 
-    {{-- Navbar --}}
-    <nav class="bg-white shadow px-8 py-4 flex justify-between items-center">
-        <div class="font-bold text-xl text-blue-600">PT XYZ</div>
-        <div class="flex items-center gap-4">
-            @auth
-                <span class="text-sm">👤 {{ Auth::user()->name }}</span>
-            @endauth
+    <x-dashboard.sidebar activeMenu="{{ request()->routeIs('pelamar.dashboard') ? 'dashboard' : '' }}" />
 
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="text-sm text-red-500 hover:underline">Logout</button>
-            </form>
-        </div>
-    </nav>
+    <div class="flex-1 flex flex-col ml-64"> {{-- Margin kiri sesuai lebar sidebar --}}
+        <x-dashboard.navbar>
+            {{-- Judul halaman bisa ditaruh di slot navbar --}}
+            @yield('page_title')
+        </x-dashboard.navbar>
 
-    {{-- Konten --}}
-    <main class="max-w-7xl mx-auto mt-8 px-4">
-        @yield('content')
-    </main>
+        <main class="flex-grow p-6 mt-5"> {{-- Margin atas sesuai tinggi navbar --}}
+            @yield('content')
+        </main>
 
+        <x-dashboard.footer />
+    </div>
 </body>
 
 </html>

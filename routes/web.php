@@ -2,27 +2,26 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LowonganController;
-use App\Http\Controllers\LamaranController;
+use App\Http\Controllers\PelamarDashboardController;
 
 Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
+Route::get('/pelamar/dashboard', [PelamarDashboardController::class, 'index'])->name('pelamar.dashboard');
 
+Route::get('/lowongan/{lowongan}', function($lowongan) {
+    return "Halaman detail lowongan untuk ID: " . $lowongan;
+})->name('lowongan.show');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('/dashboard', [PelamarDashboardController::class, 'index'])->name('dashboard');
+    // Lowongan
+    Route::get('lowongan', [LowonganController::class, 'index'])->name('lowongan.index');
+    Route::get('lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-Route::middleware(['auth'])->group(function () {
-    Route::post('/lamaran/{lowongan}', [LamaranController::class, 'store'])->name('lamaran.store');
-});
-require __DIR__.'/auth.php';
+    // Lamaran
+    Route::get('lamaran', [LamaranController::class, 'index'])->name('lamaran.index');
+    Route::get('lamaran/{id}', [LamaranController::class, 'show'])->name('lamaran.show');
+
+    // Tes
+    Route::get('tes', [TesController::class, 'index'])->name('tes.index');

@@ -14,7 +14,8 @@ return new class extends Migration
     Schema::create('lamarans', function (Blueprint $table) {
         $table->id();
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->foreignId('lowongan_id')->constrained()->onDelete('cascade');
+        $table->foreignId('lowongan_id')->constrained('lowongans')->onDelete('cascade');
+        $table->string('status')->default('diproses'); // status lamaran
         $table->timestamps();
     });
 }

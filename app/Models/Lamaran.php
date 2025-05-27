@@ -12,6 +12,7 @@ class Lamaran extends Model
     protected $fillable = [
         'user_id',
         'lowongan_id',
+        'status',
     ];
 
     public function user()
